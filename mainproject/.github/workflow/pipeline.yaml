@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
-      
+
       - name: aws-configure
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -23,16 +23,15 @@ jobs:
 
       - name: install kubectl
         uses: azure/setup-kubectl@v3
-      
+
       - name: install terraform
         uses: hashicorp/setup-terraform@v3
-      
+
       - name: run terraform init
-        run: | 
+        run: |
           cd infrastructure 
           terraform init
 
-       
       - name: terraform plan
         run: |
           cd infrastructure
@@ -48,5 +47,3 @@ jobs:
 
       - name: deploy cluster
         run: kubectl apply -f complete-demo.yaml
-     
-    
