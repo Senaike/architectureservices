@@ -1,4 +1,4 @@
-name: capstone_pipeline
+name: mymicroservices
 
 on:
   push:
@@ -15,14 +15,14 @@ jobs:
         uses: actions/checkout@v4
       
       - name: aws-configure
-        uses: azure/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
-          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-2
 
       - name: install kubectl
-        uses: aws-actions/setup-kubectl@v3
+        uses: azure/setup-kubectl@v3
       
       - name: install terraform
         uses: hashicorp/setup-terraform@v3
@@ -44,7 +44,7 @@ jobs:
           terraform apply
 
       - name: update kubectl credentials
-        run: aws eks update-kubeconfig --name Senaike-eks-1pHs5aYO --region us-east-2
+        run: aws eks update-kubeconfig --name myapp-eks-cluster --region
 
       - name: deploy cluster
         run: kubectl apply -f complete-demo.yaml
