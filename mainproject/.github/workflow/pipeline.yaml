@@ -17,18 +17,18 @@ jobs:
       - name: aws-configure
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-2
+          aws-access-key-id: ${{ AKIARBR3KPW2HFX3J5TS }}
+          aws-secret-access-key: ${{ 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 }}
+          aws-region: us-east-2
 
       - name: install kubectl
-        uses: azure/setup-kubectl@v3
+        uses: aws-actions/setup-kubectl@v3
       
       - name: install terraform
         uses: hashicorp/setup-terraform@v3
       
-      #- name: run terraform init
-       # run: | 
+      - name: run terraform init
+        run: | 
           cd infrastructure 
           terraform init
 
@@ -44,7 +44,7 @@ jobs:
           terraform apply
 
       - name: update kubectl credentials
-        run: aws eks update-kubeconfig --name myapp-eks-cluster --region
+        run: aws eks update-kubeconfig --name Senaike-eks-1pHs5aYO --region us-east-2
 
       - name: deploy cluster
         run: kubectl apply -f complete-demo.yaml
